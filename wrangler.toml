@@ -1,0 +1,9 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "ojekdes-platform"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "D1_DATABASE"
+database_name = "ojekdes-db"
+database_id = "550e8400-e29b-41d4-a716-446655440000"
+migrations_dir = "infrastructure/d1/migrations"

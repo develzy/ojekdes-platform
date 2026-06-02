@@ -123,3 +123,10 @@ dist
 
 # Turborepo
 .turbo/
+
+# Cloudflare Wrangler
+.wrangler/
+wrangler-debug.log*
+*.sqlite
+*.sqlite3
+

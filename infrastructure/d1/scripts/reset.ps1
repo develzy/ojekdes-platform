@@ -1,0 +1,22 @@
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+cd "$ScriptDir\..\..\.."
+
+Write-Host "==> Resetting D1 Database (Local)..." -ForegroundColor Green
+
+Write-Host "Wiping local wrangler state..." -ForegroundColor Yellow
+Remove-Item -Path ".wrangler" -Force -Recurse -ErrorAction SilentlyContinue
+
+Write-Host "Running migrations..." -ForegroundColor Yellow
+cmd /c "npx wrangler d1 migrations apply ojekdes-db --local"
+
+Write-Host "Running seeds..." -ForegroundColor Yellow
+Write-Host "Applying geography seed (0001_villages.sql)..." -ForegroundColor Cyan
+cmd /c "npx wrangler d1 execute ojekdes-db --local --file=infrastructure/d1/seeds/0001_villages.sql"
+
+Write-Host "Applying pricing seed (0002_tariffs.sql)..." -ForegroundColor Cyan
+cmd /c "npx wrangler d1 execute ojekdes-db --local --file=infrastructure/d1/seeds/0002_tariffs.sql"
+
+Write-Host "Applying development data seed (dev_seed.sql)..." -ForegroundColor Cyan
+cmd /c "npx wrangler d1 execute ojekdes-db --local --file=infrastructure/d1/seeds/dev_seed.sql"
+
+Write-Host "==> Database Reset Successfully." -ForegroundColor Green
