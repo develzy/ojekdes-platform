@@ -1,5 +1,5 @@
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-cd "$ScriptDir\..\..\.."
+Set-Location "$ScriptDir\..\..\.."
 
 Write-Host "==> Seeding D1 Database (Local)..." -ForegroundColor Green
 
