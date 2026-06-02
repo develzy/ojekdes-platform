@@ -1,6 +1,10 @@
 {
   "name": "ojekdes-platform",
   "private": true,
+  "packageManager": "pnpm@11.5.0",
+  "scripts": {
+    "build": "turbo build"
+  },
   "devDependencies": {
     "eslint": "^10.4.1",
     "prettier": "^3.8.3",
