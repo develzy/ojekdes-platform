@@ -1,5 +1,6 @@
 import { OrderRepository } from '../repositories/order.repository';
 import { DriverRepository } from '../repositories/driver.repository';
+import { DriverMatchingService } from './driver-matching.service';
 import { createAuditLog } from '../lib/audit';
 import { AUDIT_ACTION, ENTITY_TYPE } from '../constants';
 import type {
@@ -55,6 +56,10 @@ export class OrderService {
       metadata:    { service_type: 'RIDE', payment_method: data.payment_method },
     });
 
+    // Mulai cari & broadcast ke driver terdekat
+    const matchingService = new DriverMatchingService();
+    await matchingService.broadcastOrder(orderId, 5, db);
+
     return orderRepo.findById(orderId);
   }
 
@@ -74,6 +79,10 @@ export class OrderService {
       entity_id:   orderId,
       metadata:    { service_type: 'COURIER', payment_method: data.payment_method },
     });
+
+    // Mulai cari & broadcast ke driver terdekat
+    const matchingService = new DriverMatchingService();
+    await matchingService.broadcastOrder(orderId, 5, db);
 
     return orderRepo.findById(orderId);
   }

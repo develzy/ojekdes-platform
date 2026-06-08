@@ -205,3 +205,26 @@ export const ORDER_PROOF_TYPE = {
 } as const;
 
 export type OrderProofType = typeof ORDER_PROOF_TYPE[keyof typeof ORDER_PROOF_TYPE];
+
+// ─── Driver Matching Engine ─────────────────────────────────────────
+
+export const DRIVER_MATCH_STATUS = {
+  PENDING:  'PENDING',
+  SENT:     'SENT',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED:  'EXPIRED',
+} as const;
+
+export type DriverMatchStatus = typeof DRIVER_MATCH_STATUS[keyof typeof DRIVER_MATCH_STATUS];
+
+export const DRIVER_ACTION = {
+  BROADCAST:   'BROADCAST',
+  ACCEPT:      'ACCEPT',
+  REJECT:      'REJECT',
+  TIMEOUT:     'TIMEOUT',
+  AUTO_ASSIGN: 'AUTO_ASSIGN',
+} as const;
+
+export type DriverAction = typeof DRIVER_ACTION[keyof typeof DRIVER_ACTION];
+

@@ -49,6 +49,15 @@ export const AUDIT_ACTION = {
   UPLOAD_PROOF:        'upload_proof',
   CREATE_RATING:       'create_rating',
   TRACK_DRIVER:        'track_driver',
+  // Driver Matching Engine
+  DRIVER_ONLINE:       'driver_online',
+  DRIVER_OFFLINE:      'driver_offline',
+  UPDATE_LOCATION:     'update_location',
+  BROADCAST_ORDER:     'broadcast_order',
+  ACCEPT_ORDER:        'accept_order',
+  REJECT_ORDER:        'reject_order',
+  TIMEOUT_ASSIGNMENT:  'timeout_assignment',
+  AUTO_ASSIGN_DRIVER:  'auto_assign_driver',
 } as const;
 
 // ─── Entity Types (untuk audit_logs) ─────────────────────────────────────────

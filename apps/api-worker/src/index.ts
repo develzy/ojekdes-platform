@@ -16,6 +16,8 @@ import merchantCategoriesApp from './routes/merchant-categories';
 import merchantsApp from './routes/merchants';
 import merchantProductsApp from './routes/merchant-products';
 import merchantOrdersApp from './routes/merchant-orders';
+// Phase 2C — Driver Matching Engine
+import driverMatchingApp from './routes/driver-matching';
 import { MerchantProductCategoryRepository } from './repositories/merchant-category.repository';
 import { successResponse } from './lib/response';
 import type { Env } from './types/bindings';
@@ -35,6 +37,9 @@ app.get('/health', (c) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+// Mount routes — Phase 2C: Driver Matching Engine
+app.route('/api', driverMatchingApp);
 
 // Mount routes — Phase 1
 app.route('/api/auth', authApp);

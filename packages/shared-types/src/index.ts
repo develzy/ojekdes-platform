@@ -7,3 +7,5 @@ export * from './location/index.js';
 export * from './tariff/index.js';
 export * from './auth/index.js';
 export * from './merchant/index.js';
+export * from './matching/index.js';
+
