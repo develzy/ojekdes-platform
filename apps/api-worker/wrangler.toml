@@ -1,0 +1,67 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "ojekdes-api"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# ─── Local Development Variables ──────────────────────────────────────────────
+[vars]
+CORS_ORIGIN = "http://localhost:3000"
+NODE_ENV    = "development"
+
+# ─── Secrets (set via CLI: wrangler secret put JWT_ACCESS_SECRET) ────────────
+# JWT_ACCESS_SECRET   → wrangler secret put JWT_ACCESS_SECRET
+# JWT_REFRESH_SECRET  → wrangler secret put JWT_REFRESH_SECRET
+
+# ─── D1 Database ──────────────────────────────────────────────────────────────
+# IMPORTANT: Replace `database_id` with your real D1 database ID from:
+#   wrangler d1 create ojekdes-db
+[[d1_databases]]
+binding       = "DB"
+database_name = "ojekdes-db"
+database_id   = "4e118bba-a199-40aa-85ca-d4e8ba2d5cbc"
+migrations_dir = "../../infrastructure/d1/migrations"
+
+# ─── KV Namespaces ───────────────────────────────────────────────────────────
+# IMPORTANT: Replace `id` with your real KV namespace ID from:
+#   wrangler kv namespace create RATE_LIMIT_KV
+[[kv_namespaces]]
+binding    = "RATE_LIMIT_KV"
+id         = "00000000000000000000000000000001"
+preview_id = "00000000000000000000000000000002"
+
+# ─── Staging Environment ──────────────────────────────────────────────────────
+[env.staging]
+name = "ojekdes-api-staging"
+
+[env.staging.vars]
+CORS_ORIGIN = "https://staging.ojekdes.app"
+NODE_ENV    = "staging"
+
+[[env.staging.d1_databases]]
+binding       = "DB"
+database_name = "ojekdes-db-staging"
+database_id   = "4e118bba-a199-40aa-85ca-d4e8ba2d5cbc"
+migrations_dir = "../../infrastructure/d1/migrations"
+
+[[env.staging.kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id      = "00000000000000000000000000000003"
+
+# ─── Production Environment ───────────────────────────────────────────────────
+[env.production]
+name = "ojekdes-api"
+
+[env.production.vars]
+CORS_ORIGIN = "https://ojekdes.app"
+NODE_ENV    = "production"
+
+[[env.production.d1_databases]]
+binding       = "DB"
+database_name = "ojekdes-db"
+database_id   = "4e118bba-a199-40aa-85ca-d4e8ba2d5cbc"
+migrations_dir = "../../infrastructure/d1/migrations"
+
+[[env.production.kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id      = "00000000000000000000000000000001"

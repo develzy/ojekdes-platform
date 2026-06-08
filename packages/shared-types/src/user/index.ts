@@ -60,15 +60,10 @@ export interface UserProfile {
 export interface Session {
   id: number;
   user_id: number;
-  token: string;
-  device_info?: string;
-  ip_address?: string;
+  refresh_token_hash: string;
   expires_at: string;
   created_at: string;
   updated_at: string;
-  deleted_at?: string;
-  created_by?: number;
-  updated_by?: number;
 }
 
 export interface RefreshToken {

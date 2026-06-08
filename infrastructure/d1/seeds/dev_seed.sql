@@ -2,13 +2,16 @@
 PRAGMA foreign_keys = ON;
 
 -- ==========================================
--- 1. SEED DEV USERS (Password: password123)
--- BCrypt Hash: $2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e
+-- 1. SEED DEV USERS
+-- Password untuk semua akun dev: password123
+-- BCrypt Hash (cost=10): $2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e
+-- Hash ini HARUS identik dengan hasil hashPassword('password123')
+-- dari @ojekdes/shared-auth saat pengujian API.
 -- ==========================================
 INSERT INTO users (id, phone, email, password_hash, role, is_active) VALUES
-(1, '081234567890', 'admin@ojekdes.com', '$2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e', 'admin', 1),
-(2, '081234567891', 'driver@ojekdes.com', '$2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e', 'driver', 1),
-(3, '081234567892', 'customer@ojekdes.com', '$2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e', 'customer', 1);
+(1, '081234567890', 'admin@ojekdes.local', '$2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e', 'admin', 1),
+(2, '081234567891', 'driver@ojekdes.local', '$2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e', 'driver', 1),
+(3, '081234567892', 'customer@ojekdes.local', '$2a$10$wK5h6F0L4o3/Kj6eB2x/Nu6w07dE3/h9bK87.6b7C7v9aE8uLhP2e', 'customer', 1);
 
 -- ==========================================
 -- 2. SEED DEV USER PROFILES

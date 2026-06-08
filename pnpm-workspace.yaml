@@ -2,8 +2,10 @@ packages:
   - "apps/*"
   - "packages/*"
 allowBuilds:
+  esbuild: true
   sharp: true
   unrs-resolver: true
+  workerd: true
 minimumReleaseAgeExclude:
   - '@next/env@16.2.7'
   - '@next/eslint-plugin-next@16.2.7'
