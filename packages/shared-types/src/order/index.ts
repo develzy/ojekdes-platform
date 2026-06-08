@@ -1,63 +1,130 @@
+// ─── Order Status Types ───────────────────────────────────────────────────────
+// Self-contained — tidak import dari package lain
+
+export type OrderStatus        = 'SEARCHING_DRIVER' | 'DRIVER_ASSIGNED' | 'DRIVER_ARRIVED' | 'ON_TRIP' | 'DELIVERED' | 'COMPLETED' | 'CANCELLED';
+export type OrderServiceType   = 'RIDE' | 'COURIER' | 'MERCHANT';
+export type OrderPaymentMethod = 'CASH' | 'WALLET' | 'MIDTRANS';
+export type OrderPaymentStatus = 'PENDING' | 'PAID' | 'FAILED' | 'REFUNDED';
+export type AssignmentStatus   = 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'EXPIRED';
+export type OrderProofType     = 'PICKUP' | 'DELIVERY';
+
+// ─── Order ────────────────────────────────────────────────────────────────────
+
 export interface Order {
   id: number;
-  order_code: string;
-  customer_id: number;
-  driver_id?: number;
-  service_type: 'MOTOR' | 'BENTOR' | 'PELAJAR';
-  status: 'PENDING' | 'SEARCHING_DRIVER' | 'DRIVER_ACCEPTED' | 'DRIVER_ARRIVED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
-  distance: number;
-  fare: number;
-  platform_fee: number;
-  net_fare: number;
-  discount: number;
-  surcharge: number;
-  payment_method: 'CASH' | 'QRIS';
-  created_at: string;
-  updated_at: string;
-  deleted_at?: string;
-  created_by?: number;
-  updated_by?: number;
-}
+  order_number: string;
 
-export interface OrderLocation {
-  id: number;
-  order_id: number;
+  customer_id: number;
+  driver_id: number | null;
+  merchant_id: number | null;
+  merchant_order_id: number | null;
+
+  service_type: OrderServiceType;
+
+  pickup_name: string | null;
+  pickup_phone: string | null;
   pickup_address: string;
   pickup_latitude: number;
   pickup_longitude: number;
-  pickup_village_id: number;
-  dropoff_address: string;
-  dropoff_latitude: number;
-  dropoff_longitude: number;
-  dropoff_village_id: number;
+
+  destination_name: string | null;
+  destination_phone: string | null;
+  destination_address: string;
+  destination_latitude: number;
+  destination_longitude: number;
+
+  distance_km: number;
+  duration_minutes: number;
+
+  estimated_price: number;
+  final_price: number;
+
+  payment_method: OrderPaymentMethod;
+  payment_status: OrderPaymentStatus;
+
+  status: OrderStatus;
+  notes: string | null;
+
   created_at: string;
   updated_at: string;
-  deleted_at?: string;
-  created_by?: number;
-  updated_by?: number;
 }
 
-export interface OrderStatusLog {
+// ─── Order Tracking ───────────────────────────────────────────────────────────
+
+export interface OrderTracking {
   id: number;
   order_id: number;
-  status: string;
-  notes?: string;
-  created_at: string;
-  updated_at: string;
-  deleted_at?: string;
-  created_by?: number;
-  updated_by?: number;
+  driver_id: number;
+  latitude: number;
+  longitude: number;
+  accuracy: number | null;
+  recorded_at: string;
 }
+
+// ─── Order Status History ─────────────────────────────────────────────────────
+
+export interface OrderStatusHistory {
+  id: number;
+  order_id: number;
+  old_status: string | null;
+  new_status: string;
+  changed_by: number | null;
+  notes: string | null;
+  created_at: string;
+}
+
+// ─── Driver Assignment ────────────────────────────────────────────────────────
+
+export interface DriverAssignment {
+  id: number;
+  order_id: number;
+  driver_id: number;
+  assignment_status: AssignmentStatus;
+  assigned_at: string;
+  responded_at: string | null;
+}
+
+// ─── Order Cancellation ───────────────────────────────────────────────────────
 
 export interface OrderCancellation {
   id: number;
   order_id: number;
   cancelled_by: number;
-  reason_category: 'driver_not_moving' | 'client_cancelled' | 'change_mind' | 'wait_too_long' | 'other';
-  reason_text?: string;
+  reason: string;
+  refund_amount: number;
   created_at: string;
-  updated_at: string;
-  deleted_at?: string;
-  created_by?: number;
-  updated_by?: number;
+}
+
+// ─── Order Rating ─────────────────────────────────────────────────────────────
+
+export interface OrderRating {
+  id: number;
+  order_id: number;
+  customer_id: number;
+  driver_id: number;
+  rating: number;
+  review: string | null;
+  created_at: string;
+}
+
+// ─── Order Proof ──────────────────────────────────────────────────────────────
+
+export interface OrderProof {
+  id: number;
+  order_id: number;
+  proof_type: OrderProofType;
+  image_url: string;
+  uploaded_by: number;
+  created_at: string;
+}
+
+// ─── Composite Types ──────────────────────────────────────────────────────────
+
+export interface OrderDetail extends Order {
+  status_history: OrderStatusHistory[];
+  tracking: OrderTracking[];
+  assignment: DriverAssignment | null;
+  cancellation: OrderCancellation | null;
+  rating: OrderRating | null;
+  proofs: OrderProof[];
 }

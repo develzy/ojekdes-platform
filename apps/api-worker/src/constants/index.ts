@@ -39,6 +39,16 @@ export const AUDIT_ACTION = {
   APPROVE_MERCHANT:  'approve_merchant',
   REJECT_MERCHANT:   'reject_merchant',
   SUSPEND_MERCHANT:  'suspend_merchant',
+  // Order Engine
+  CREATE_ORDER:        'create_order',
+  ASSIGN_DRIVER:       'assign_driver',
+  ACCEPT_ASSIGNMENT:   'accept_assignment',
+  REJECT_ASSIGNMENT:   'reject_assignment',
+  UPDATE_ORDER_STATUS: 'update_order_status',
+  CANCEL_ORDER:        'cancel_order',
+  UPLOAD_PROOF:        'upload_proof',
+  CREATE_RATING:       'create_rating',
+  TRACK_DRIVER:        'track_driver',
 } as const;
 
 // ─── Entity Types (untuk audit_logs) ─────────────────────────────────────────
@@ -51,8 +61,11 @@ export const ENTITY_TYPE = {
   PAYMENT:          'payment',
   WALLET:           'wallet',
   // Merchant
-  MERCHANT:         'merchant',
-  MERCHANT_PRODUCT: 'merchant_product',
-  MERCHANT_ORDER:   'merchant_order',
-  MERCHANT_DOCUMENT:'merchant_document',
+  MERCHANT:          'merchant',
+  MERCHANT_PRODUCT:  'merchant_product',
+  MERCHANT_ORDER:    'merchant_order',
+  MERCHANT_DOCUMENT: 'merchant_document',
+  // Order Engine
+  ORDER_TRACKING:    'order_tracking',
+  DRIVER_ASSIGNMENT: 'driver_assignment',
 } as const;

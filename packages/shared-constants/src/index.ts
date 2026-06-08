@@ -16,18 +16,6 @@ export const USER_STATUS = {
 
 export type UserStatus = typeof USER_STATUS[keyof typeof USER_STATUS];
 
-export const ORDER_STATUS = {
-  PENDING: 'PENDING',
-  SEARCHING_DRIVER: 'SEARCHING_DRIVER',
-  DRIVER_ACCEPTED: 'DRIVER_ACCEPTED',
-  DRIVER_ARRIVED: 'DRIVER_ARRIVED',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED',
-} as const;
-
-export type OrderStatus = typeof ORDER_STATUS[keyof typeof ORDER_STATUS];
-
 export const PAYMENT_STATUS = {
   PENDING: 'PENDING',
   PAID: 'PAID',
@@ -162,3 +150,58 @@ export const MERCHANT_CATEGORY_CODE = {
 } as const;
 
 export type MerchantCategoryCode = typeof MERCHANT_CATEGORY_CODE[keyof typeof MERCHANT_CATEGORY_CODE];
+
+// ─── Order Engine ─────────────────────────────────────────────────────────────
+
+export const ORDER_STATUS = {
+  SEARCHING_DRIVER: 'SEARCHING_DRIVER',
+  DRIVER_ASSIGNED:  'DRIVER_ASSIGNED',
+  DRIVER_ARRIVED:   'DRIVER_ARRIVED',
+  ON_TRIP:          'ON_TRIP',
+  DELIVERED:        'DELIVERED',
+  COMPLETED:        'COMPLETED',
+  CANCELLED:        'CANCELLED',
+} as const;
+
+export type OrderStatus = typeof ORDER_STATUS[keyof typeof ORDER_STATUS];
+
+export const ORDER_SERVICE_TYPE = {
+  RIDE:     'RIDE',
+  COURIER:  'COURIER',
+  MERCHANT: 'MERCHANT',
+} as const;
+
+export type OrderServiceType = typeof ORDER_SERVICE_TYPE[keyof typeof ORDER_SERVICE_TYPE];
+
+export const ORDER_PAYMENT_METHOD = {
+  CASH:     'CASH',
+  WALLET:   'WALLET',
+  MIDTRANS: 'MIDTRANS',
+} as const;
+
+export type OrderPaymentMethod = typeof ORDER_PAYMENT_METHOD[keyof typeof ORDER_PAYMENT_METHOD];
+
+export const ORDER_PAYMENT_STATUS = {
+  PENDING:  'PENDING',
+  PAID:     'PAID',
+  FAILED:   'FAILED',
+  REFUNDED: 'REFUNDED',
+} as const;
+
+export type OrderPaymentStatus = typeof ORDER_PAYMENT_STATUS[keyof typeof ORDER_PAYMENT_STATUS];
+
+export const ASSIGNMENT_STATUS = {
+  PENDING:  'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED:  'EXPIRED',
+} as const;
+
+export type AssignmentStatus = typeof ASSIGNMENT_STATUS[keyof typeof ASSIGNMENT_STATUS];
+
+export const ORDER_PROOF_TYPE = {
+  PICKUP:   'PICKUP',
+  DELIVERY: 'DELIVERY',
+} as const;
+
+export type OrderProofType = typeof ORDER_PROOF_TYPE[keyof typeof ORDER_PROOF_TYPE];
