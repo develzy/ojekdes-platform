@@ -1,7 +1,10 @@
-import type { MerchantStatus, MerchantOrderStatus, MerchantDocumentType } from '@ojekdes/shared-constants';
+// ─── Merchant Status Types ────────────────────────────────────────────────────
+// Didefinisikan langsung di sini agar shared-types tetap self-contained
+// (tidak bergantung ke package lain).
 
-// Re-export dari constants agar konsumen cukup import dari shared-types
-export type { MerchantStatus, MerchantOrderStatus, MerchantDocumentType };
+export type MerchantStatus         = 'PENDING' | 'APPROVED' | 'REJECTED' | 'SUSPENDED';
+export type MerchantOrderStatus    = 'PENDING' | 'CONFIRMED' | 'PREPARING' | 'READY_FOR_PICKUP' | 'PICKED_UP' | 'DELIVERED' | 'CANCELLED';
+export type MerchantDocumentType   = 'KTP' | 'NPWP' | 'NIB' | 'SIUP' | 'FOTO_TOKO';
 
 // ─── Merchant Business Category ───────────────────────────────────────────────
 
