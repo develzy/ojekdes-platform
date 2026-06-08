@@ -1,5 +1,7 @@
 import { OrderRepository } from '../repositories/order.repository';
 import { DriverRepository } from '../repositories/driver.repository';
+import { DriverMatchingRepository } from '../repositories/driver-matching.repository';
+import { PaymentService } from './payment.service';
 import { DriverMatchingService } from './driver-matching.service';
 import { createAuditLog } from '../lib/audit';
 import { AUDIT_ACTION, ENTITY_TYPE } from '../constants';
@@ -218,6 +220,14 @@ export class OrderService {
 
     await orderRepo.updateStatus(orderId, newStatus, actorId, data.notes);
 
+    if (newStatus === 'COMPLETED') {
+      await PaymentService.completeOrderSettlement(orderId, db);
+      if (order.driver_id) {
+        const matchingRepo = new DriverMatchingRepository(db);
+        await matchingRepo.assignDriver(order.driver_id, null);
+      }
+    }
+
     await createAuditLog(db, {
       user_id:     actorId,
       action:      AUDIT_ACTION.UPDATE_ORDER_STATUS,
@@ -252,6 +262,20 @@ export class OrderService {
       cancelled_by: actorId,
       reason:       data.reason,
     });
+
+    if (order.driver_id) {
+      const matchingRepo = new DriverMatchingRepository(db);
+      await matchingRepo.assignDriver(order.driver_id, null);
+    }
+
+    if (order.payment_status === 'PAID') {
+      const payment = await db.prepare('SELECT * FROM payment_transactions WHERE order_id = ? AND status = "PAID" LIMIT 1')
+        .bind(orderId)
+        .first<any>();
+      if (payment) {
+        await PaymentService.refundOrder(payment.id, payment.gross_amount, `Order ${order.order_number} dibatalkan`, db);
+      }
+    }
 
     await createAuditLog(db, {
       user_id:     actorId,

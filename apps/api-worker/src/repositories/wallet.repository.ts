@@ -34,7 +34,7 @@ export class WalletRepository {
   async findByUserId(userId: number): Promise<DbWallet | null> {
     return dbQueryFirst<DbWallet>(
       this.db,
-      `SELECT * FROM wallets WHERE user_id = ? AND deleted_at IS NULL LIMIT 1`,
+      `SELECT * FROM wallets WHERE user_id = ? LIMIT 1`,
       [userId],
     );
   }

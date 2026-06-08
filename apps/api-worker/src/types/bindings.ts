@@ -18,6 +18,11 @@ export interface Env {
   /** Allowed CORS origin (e.g. 'https://admin.ojekdes.app') */
   CORS_ORIGIN: string;
 
+  /** Midtrans environment keys */
+  MIDTRANS_SERVER_KEY?: string;
+  MIDTRANS_CLIENT_KEY?: string;
+  MIDTRANS_IS_PRODUCTION?: string | boolean;
+
   /** Runtime environment identifier */
   NODE_ENV?: string;
 }

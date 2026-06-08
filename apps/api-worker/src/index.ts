@@ -9,7 +9,7 @@ import driversApp from './routes/drivers';
 import customersApp from './routes/customers';
 import locationsApp from './routes/locations';
 import ordersApp from './routes/orders';
-import paymentsApp from './routes/payments';
+import paymentsApp, { adminPayoutsApp } from './routes/payments';
 import walletsApp from './routes/wallets';
 // Phase 2A — Merchant Module
 import merchantCategoriesApp from './routes/merchant-categories';
@@ -49,7 +49,8 @@ app.route('/api/customers', customersApp);
 app.route('/api/locations', locationsApp);
 app.route('/api/orders', ordersApp);
 app.route('/api/payments', paymentsApp);
-app.route('/api/wallets', walletsApp);
+app.route('/api/wallet', walletsApp);
+app.route('/api/admin/payouts', adminPayoutsApp);
 
 // Mount routes — Phase 2A: Merchant Module
 app.route('/api/merchant-categories', merchantCategoriesApp);

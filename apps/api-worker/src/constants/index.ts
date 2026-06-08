@@ -58,6 +58,14 @@ export const AUDIT_ACTION = {
   REJECT_ORDER:        'reject_order',
   TIMEOUT_ASSIGNMENT:  'timeout_assignment',
   AUTO_ASSIGN_DRIVER:  'auto_assign_driver',
+  // Phase 2D Wallet & Midtrans
+  CREATE_PAYMENT:      'create_payment',
+  PAY_PAYMENT:         'pay_payment',
+  REFUND_PAYMENT:      'refund_payment',
+  CREATE_PAYOUT:       'create_payout',
+  APPROVE_PAYOUT:      'approve_payout',
+  REJECT_PAYOUT:       'reject_payout',
+  CREATE_SETTLEMENT:   'create_settlement',
 } as const;
 
 // ─── Entity Types (untuk audit_logs) ─────────────────────────────────────────

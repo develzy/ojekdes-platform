@@ -1,6 +1,7 @@
 import { MerchantOrderRepository } from '../repositories/merchant-order.repository';
 import { MerchantProductRepository } from '../repositories/merchant-product.repository';
 import { MerchantRepository } from '../repositories/merchant.repository';
+import { PaymentService } from './payment.service';
 import { createAuditLog } from '../lib/audit';
 import { AUDIT_ACTION, ENTITY_TYPE } from '../constants';
 import type { CreateMerchantOrderInput, UpdateMerchantOrderStatusInput, MerchantOrderQueryInput } from '../validators/merchant';
@@ -156,6 +157,10 @@ export class MerchantOrderService {
     }
 
     await orderRepo.updateStatus(orderId, newStatus);
+
+    if (newStatus === 'DELIVERED') {
+      await PaymentService.completeMerchantSettlement(orderId, db);
+    }
 
     await createAuditLog(db, {
       user_id:     actorId,

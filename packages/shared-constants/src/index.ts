@@ -43,8 +43,12 @@ export const VEHICLE_TYPE = {
 export type VehicleType = typeof VEHICLE_TYPE[keyof typeof VEHICLE_TYPE];
 
 export const PAYMENT_METHOD = {
-  CASH: 'CASH',
-  QRIS: 'QRIS',
+  CASH:          'CASH',
+  WALLET:        'WALLET',
+  QRIS:          'QRIS',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  GOPAY:         'GOPAY',
+  SHOPEEPAY:     'SHOPEEPAY',
 } as const;
 
 export type PaymentMethod = typeof PAYMENT_METHOD[keyof typeof PAYMENT_METHOD];
@@ -228,3 +232,29 @@ export const DRIVER_ACTION = {
 
 export type DriverAction = typeof DRIVER_ACTION[keyof typeof DRIVER_ACTION];
 
+// ─── Phase 2D Wallet & Midtrans ──────────────────────────────────────
+
+export const PLATFORM_CONFIG = {
+  RIDE_FEE_PERCENT:     20,
+  COURIER_FEE_PERCENT:  20,
+  MERCHANT_FEE_PERCENT: 10,
+} as const;
+
+export type PlatformConfig = typeof PLATFORM_CONFIG;
+
+// PAYMENT_STATUS and PAYMENT_METHOD are declared above
+
+export const WALLET_TRANSACTION_TYPE = {
+  CREDIT: 'CREDIT',
+  DEBIT:  'DEBIT',
+} as const;
+
+export type WalletTransactionType = typeof WALLET_TRANSACTION_TYPE[keyof typeof WALLET_TRANSACTION_TYPE];
+
+export const SETTLEMENT_STATUS = {
+  PENDING: 'PENDING',
+  SETTLED: 'SETTLED',
+  FAILED:  'FAILED',
+} as const;
+
+export type SettlementStatus = typeof SETTLEMENT_STATUS[keyof typeof SETTLEMENT_STATUS];
