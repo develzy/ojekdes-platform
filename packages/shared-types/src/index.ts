@@ -6,3 +6,4 @@ export * from './payment/index.js';
 export * from './location/index.js';
 export * from './tariff/index.js';
 export * from './auth/index.js';
+export * from './merchant/index.js';

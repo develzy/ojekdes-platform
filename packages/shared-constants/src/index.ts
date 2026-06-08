@@ -118,3 +118,47 @@ export const CANCEL_REASON_CATEGORY = {
 } as const;
 
 export type CancelReasonCategory = typeof CANCEL_REASON_CATEGORY[keyof typeof CANCEL_REASON_CATEGORY];
+
+// ─── Merchant ─────────────────────────────────────────────────────────────────
+
+export const MERCHANT_STATUS = {
+  PENDING:   'PENDING',
+  APPROVED:  'APPROVED',
+  REJECTED:  'REJECTED',
+  SUSPENDED: 'SUSPENDED',
+} as const;
+
+export type MerchantStatus = typeof MERCHANT_STATUS[keyof typeof MERCHANT_STATUS];
+
+export const MERCHANT_ORDER_STATUS = {
+  PENDING:          'PENDING',
+  CONFIRMED:        'CONFIRMED',
+  PREPARING:        'PREPARING',
+  READY_FOR_PICKUP: 'READY_FOR_PICKUP',
+  PICKED_UP:        'PICKED_UP',
+  DELIVERED:        'DELIVERED',
+  CANCELLED:        'CANCELLED',
+} as const;
+
+export type MerchantOrderStatus = typeof MERCHANT_ORDER_STATUS[keyof typeof MERCHANT_ORDER_STATUS];
+
+export const MERCHANT_DOCUMENT_TYPE = {
+  KTP:       'KTP',
+  NPWP:      'NPWP',
+  NIB:       'NIB',
+  SIUP:      'SIUP',
+  FOTO_TOKO: 'FOTO_TOKO',
+} as const;
+
+export type MerchantDocumentType = typeof MERCHANT_DOCUMENT_TYPE[keyof typeof MERCHANT_DOCUMENT_TYPE];
+
+export const MERCHANT_CATEGORY_CODE = {
+  FOOD:       'FOOD',
+  GROCERY:    'GROCERY',
+  FARM:       'FARM',
+  FISHERY:    'FISHERY',
+  HANDICRAFT: 'HANDICRAFT',
+  SERVICES:   'SERVICES',
+} as const;
+
+export type MerchantCategoryCode = typeof MERCHANT_CATEGORY_CODE[keyof typeof MERCHANT_CATEGORY_CODE];
